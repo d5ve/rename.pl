@@ -1,0 +1,59 @@
+=head1 NAME
+
+rename.pl - perl file renamer
+
+=head1 DESCRIPTION
+
+Rename a list of files based upon perl operations.
+
+Based upon Larry Wall's filename fixer script:
+    The Perl Coookbook,
+    Chapter 9.9, Renaming Files
+    O'Reilly, 1999
+
+=head1 SYNOPSIS
+
+    rename.pl [options] [perl statements] [files]
+
+    Options:
+        --debug       verbose mode
+        --help        brief help message - default behaviour
+        --man         full documentation
+        --doit        rename the files - default is to display proposed change
+
+    Examples:
+
+        # Rename all avi files to just show name and episode string.
+        rename.pl "s{.*(S\d\dE\d\d).*)}{Lost - \$1.avi}xms" *.avi
+
+        # Format filenames with digits into a zero-padded sortable form. 
+        rename.pl 's/-(\d+)/sprintf q{-%03d}, $1/exms' *.jpg
+        
+=head1 OPTIONS
+
+=over 8
+
+=item B<--debug>
+
+    Print details of all the work being done.
+
+=item B<--help>
+
+    Print a brief help message and exits. This mode is the default behaviour.
+
+=item B<--man>
+
+    Prints the manual page and exits.
+
+=back
+
+=head1 LICENCE
+
+Copyright 2015 Dave Webb
+
+rename.pl is free software. You may use and distribute this script under the
+same terms as Perl itself.
+
+
+=cut
+
