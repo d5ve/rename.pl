@@ -6,6 +6,8 @@ rename.pl - perl file renamer
 
 Rename a list of files based upon perl operations.
 
+Dies if a rename operation would overwrite an existing file.
+
 Based upon Larry Wall's filename fixer script:
     The Perl Coookbook,
     Chapter 9.9, Renaming Files

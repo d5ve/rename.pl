@@ -26,11 +26,13 @@ pod2usage(1)             unless @ARGV;
 
 my $op = shift or pod2usage(1);
 
+my %targets;
 chomp(@ARGV = <STDIN>) unless @ARGV;
 for (@ARGV) {
     my $was = $_;
     eval $op;
     die $@ if $@;
+    die "ERROR: Would rename '$was' over the top of '$_'" if $targets{$_} ++;
     if ( $was ne $_ ) {
         if ( length("$was -> $_") > 80 ) {
             print "$doit - $was -> \n\t\t$_\n";
@@ -58,6 +60,8 @@ rename.pl - perl file renamer
 =head1 DESCRIPTION
 
 Rename a list of files based upon perl operations.
+
+Dies if a rename operation would overwrite an existing file.
 
 Based upon Larry Wall's filename fixer script:
     The Perl Coookbook,
